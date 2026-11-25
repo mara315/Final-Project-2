@@ -80,7 +80,7 @@ class Gui:
         self.frame_four.pack(pady=5)
 
         '''
-        Makes the status lables
+        Makes the status labels
         '''
         self.frame_five = Frame(window)
 
@@ -92,3 +92,115 @@ class Gui:
 
         self.label_message.pack()
         self.frame_five.pack()
+
+    def generate_scores(self):
+        '''
+        Removes old scores.
+        '''
+
+        for widget in self.frame_three.winfo_children():
+            widget.destroy()
+
+        self.score_entries.clear()
+
+        try:
+
+            attempts = int(
+                self.input_attempts.get()
+            )
+
+            if attempts < 1 or attempts > 4:
+                raise ValueError
+
+            for i in range(attempts):
+                score_frame = Frame(
+                    self.frame_three
+                )
+
+                score_label = Label(
+                    score_frame,
+                    text=f'Score {i + 1}:'
+                )
+
+                score_entry = Entry(
+                    score_frame,
+                    width=10
+                )
+
+                score_label.pack(side='left')
+                score_entry.pack(side='left')
+
+                score_frame.pack(anchor='w')
+
+                self.score_entries.append(
+                    score_entry
+                )
+
+            self.label_message.config(
+                text='Scores generated.',
+                fg='green'
+            )
+
+        except:
+
+            self.label_message.config(
+                text='Attempts must be 1-4.',
+                fg='red'
+            )
+
+    def submit(self):
+
+        try:
+
+            name = self.input_name.get().strip()
+
+            if name == '':
+                raise ValueError(
+                    'Name cannot be empty.'
+                )
+
+            scores = []
+
+            for entry in self.score_entries:
+
+                score = float(
+                    entry.get()
+                )
+
+                if score < 0 or score > 100:
+                    raise ValueError(
+                        'Scores must be 0-100.'
+                    )
+
+                scores.append(score)
+
+            best_score = max(scores)
+
+            average = sum(scores) / len(scores)
+
+            with open(
+                    'grades.csv',
+                    'a',
+                    newline=''
+            ) as file:
+
+                writer = csv.writer(file)
+
+                writer.writerow([
+                    name,
+                    *scores,
+                    best_score,
+                    average
+                ])
+
+            self.label_message.config(
+                text='Submitted',
+                fg='green'
+            )
+
+        except Exception as error:
+
+            self.label_message.config(
+                text=str(error),
+                fg='red'
+            )
