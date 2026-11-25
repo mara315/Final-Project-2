@@ -4,7 +4,7 @@ from gui import Gui
 window = Tk()
 
 window.title('Grades')
-window.geometry('250x250')
+window.geometry('300x300')
 window.resizable(width=False, height=False)
 
 Gui(window)
