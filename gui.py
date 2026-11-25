@@ -1,5 +1,10 @@
 from tkinter import *
 import csv
+from logic import(
+    get_grades,
+    calc_avg,
+    calc_best
+)
 
 class Gui:
 
@@ -174,9 +179,23 @@ class Gui:
 
                 scores.append(score)
 
-            best_score = max(scores)
+            best = calc_best(scores)
 
-            average = sum(scores) / len(scores)
+            average = calc_avg(scores)
+
+            grade = get_grades(best, average)
+
+            row = [name]
+
+            for score in scores:
+                row.append(score)
+
+            while len(row) < 5:
+                row.append('')
+
+            row.append(best)
+            row.append(round(average, 2))
+            row.append(grade)
 
             with open(
                     'grades.csv',
@@ -186,17 +205,17 @@ class Gui:
 
                 writer = csv.writer(file)
 
-                writer.writerow([
-                    name,
-                    *scores,
-                    best_score,
-                    average
-                ])
+                writer.writerow(row)
 
             self.label_message.config(
-                text='Submitted',
+                text=f'Submitted! Grade = {grade}',
                 fg='green'
             )
+
+            self.input_name.delete(0, END)
+
+            for entry in self.score_entries:
+                entry.delete(0, END)
 
         except Exception as error:
 
