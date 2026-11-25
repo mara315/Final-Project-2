@@ -16,7 +16,7 @@ class Gui:
 
         self.label_name = Label(
             self.frame_one,
-            text="Student Name:"
+            text='Student Name:'
         )
 
         self.input_name = Entry(
@@ -37,7 +37,7 @@ class Gui:
 
         self.label_attempts = Label(
             self.frame_two,
-            text="No of Attempts:"
+            text='No of Attempts:'
         )
 
         self.input_attempts = Entry(
@@ -47,7 +47,7 @@ class Gui:
 
         self.button_generate = Button(
             self.frame_two,
-            text="Generate",
+            text='Generate',
             command=self.generate_scores
         )
 
@@ -57,5 +57,38 @@ class Gui:
 
         self.frame_two.pack(pady=5)
 
-        
+        '''
+        Makes scores dynamic
+        '''
 
+        self.frame_three = Frame(window)
+        self.frame_three.pack(pady=5)
+
+        '''
+        Makes the submit button
+        '''
+        self.frame_four = Frame(window)
+
+        self.button_submit = Button(
+            self.frame_four,
+            text='SUBMIT',
+            width=15,
+            command=self.submit
+        )
+
+        self.button_submit.pack()
+        self.frame_four.pack(pady=5)
+
+        '''
+        Makes the status lables
+        '''
+        self.frame_five = Frame(window)
+
+        self.label_message= Label(
+            self.frame_five,
+            text='Ready',
+            fg='blue'
+        )
+
+        self.label_message.pack()
+        self.frame_five.pack()
