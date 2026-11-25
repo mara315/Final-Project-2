@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>250</width>
-    <height>250</height>
+    <height>318</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>250</width>
-    <height>250</height>
+    <width>500</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -68,6 +68,29 @@
      <y>70</y>
      <width>113</width>
      <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSubmit">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>260</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>SUBMIT</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="scoreWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>110</y>
+     <width>120</width>
+     <height>121</height>
     </rect>
    </property>
   </widget>
